@@ -28,12 +28,12 @@ public class Student extends Thread {
     /**
      * The students get tired with this probability after each study period
      */
-    private static final float TIREDNESS_PROBABILITY = 0.1f;
+    private static final float TIREDNESS_PROBABILITY = 0.5f; //Org 0.1F
 
     /**
      * Minimum time it takes to study, in milliseconds
      */
-    private final static int MIN_STUDY_TIME = 5000;
+    private final static int MIN_STUDY_TIME = 50; //org 5k
 
     void setAssistant(TeachingAssistant ta) {
         this.ta = ta;
@@ -114,32 +114,45 @@ public class Student extends Thread {
     /**
      * This method should block while the student is waiting in the queue.
      */
-    private void waitForTAToBecomeAvailable() {
+    private synchronized void waitForTAToBecomeAvailable() {
         // TODO - wait for the TA to become available
+        try {
+            wait();
+        } catch (Exception ex) {
+
+        }
     }
 
     /**
      * This method should block while the consultation is in progress.
      */
-    private void waitForConsultationToBeDone() {
+    private synchronized  void waitForConsultationToBeDone() {
         // TODO - wait for the consultation to be done
+
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * A method called from the TA thread to let this student know that helping
      * session is finished.
      */
-    void notifyHelpDone() {
+    synchronized void notifyHelpDone() {
         // TODO - Notify the student letting him/her 
         // know that the helping is done and it's time to wake up :)
+        notifyAll();
     }
     
     /**
      * A method called from the TA thread to let this student know that
      * the waiting is finished and he/she can come in.
      */
-    void notifyWaitingDone() {
+    synchronized void notifyWaitingDone() {
         // TODO - Notify the student that the waiting is finished and 
         // he/she can come in.
+        notifyAll();
     }
 }

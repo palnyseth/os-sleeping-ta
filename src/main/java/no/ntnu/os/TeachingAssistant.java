@@ -2,6 +2,7 @@ package no.ntnu.os;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 /**
  * Template for Teaching Assistant (TA) Thread. Fill in and update code in this
@@ -41,7 +42,7 @@ public class TeachingAssistant extends Thread {
     private boolean shouldWork;
     
     /** Minimum time it takes to help, in milliseconds */
-    private final static int MIN_HELP_TIME = 5000; 
+    private final static int MIN_HELP_TIME = 50; //Org 5000
     
     /**
      * Set up the TAs office
@@ -63,13 +64,15 @@ public class TeachingAssistant extends Thread {
      * @param s
      * @return true if student accepted, false otherwise
      */
-    public boolean getIntoOffice(Student s) {
+    public synchronized boolean getIntoOffice(Student s) {
         if (isBusy()) return false;
         
         // Not busy, accept the student
         this.currentStudent = s;
         
         // TODO - notify the TA to wake up
+
+        notifyAll();
         
         return true;
     }
@@ -105,8 +108,10 @@ public class TeachingAssistant extends Thread {
      * Ask the TA to go home once he has helped all the waiting students
      * Will not accept any new students in the queue
      */
-    public void goHome() {
+    public synchronized void goHome() {
+        notifyAll();
         shouldWork = false;
+        System.out.println("JE STIKK HÆMMAT");
     }
     
     /***************************************************
@@ -144,7 +149,7 @@ public class TeachingAssistant extends Thread {
     private void helpStudent() throws InterruptedException {
         // Help takes some time
         System.out.println("TA: TA helping student " + currentStudent.getId() + "...");
-        int sleepTime = MIN_HELP_TIME + random.nextInt(1000);
+        int sleepTime = MIN_HELP_TIME + random.nextInt(10); //Org bound = 1000
         sleep(sleepTime);
         System.out.println("TA: TA done with helping student " 
                 + currentStudent.getId() + "...");
@@ -162,10 +167,14 @@ public class TeachingAssistant extends Thread {
      * have any student to help to. A blocking method
      * @throws InterruptedException 
      */
-    private void sleepUntilFirstStudent() throws InterruptedException {
+    private synchronized void sleepUntilFirstStudent() throws InterruptedException {
         System.out.println("TA: TA taking a nap. ZzZz...");
         
         // TODO - Wait for "Wake up" signal from a student
+
+        while (currentStudent == null && shouldWork) {
+            wait();
+        }
     }
 
     /**

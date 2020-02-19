@@ -1,0 +1,10 @@
+
+©%squid:RedundantThrowsDeclarationCheck¥"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(Œçí®
+csquid:S2142‡"FEither re-interrupt this method or rethrow the "InterruptedException".(è®ã¶øÿÿÿÿ
+]squid:S00112["FDefine and throw a dedicated exception instead of using a generic one.(±©/
+Nsquid:S1135"2Complete the task associated to this TODO comment.(»Õ ùùÿÿÿÿ
+jsquid:ModifiersOrderCheck,"EReorder the modifiers to comply with the Java Language Specification.(Ô·¢
+Nsquid:S1135H"2Complete the task associated to this TODO comment.(ÏÝà´úÿÿÿÿ
+^squid:S00112X"FDefine and throw a dedicated exception instead of using a generic one.(Îºéß
+[squid:S1155±">Use isEmpty() to check whether the collection is empty or not.(éµ­Æÿÿÿÿÿ
+Osquid:S1135¨"2Complete the task associated to this TODO comment.(°Ü¯‰þÿÿÿÿ

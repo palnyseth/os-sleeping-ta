@@ -1,0 +1,9 @@
+
+osquid:ModifiersOrderCheck$"EReorder the modifiers to comply with the Java Language Specification.(¨õÝÃýÿÿÿÿ
+hsquid:S11925"LDefine a constant instead of duplicating this literal "S: Student " 5 times.(Ë»Š²üÿÿÿÿ
+Isquid:S1135v"2Complete the task associated to this TODO comment.(°¢êº
+Nsquid:S1135}"2Complete the task associated to this TODO comment.(ÅÆý·þÿÿÿÿ
+Osquid:S1135…"2Complete the task associated to this TODO comment.(©„Ü˜þÿÿÿÿ
+Osquid:S1135Ž"2Complete the task associated to this TODO comment.(™¼Çžùÿÿÿÿ
+bsquid:S21427"FEither re-interrupt this method or rethrow the "InterruptedException".(è®ã¶øÿÿÿÿ
+^squid:S00112H"FDefine and throw a dedicated exception instead of using a generic one.(»ùù«
